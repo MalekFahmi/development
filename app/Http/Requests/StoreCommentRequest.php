@@ -22,7 +22,6 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'userId'=>['required'],
             'schoolId'=>['required'],
             'description'=>['required']
         ];

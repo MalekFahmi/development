@@ -11,14 +11,5 @@ class Comment extends Model
         'userId',
         'schoolId',
         'description'
-    ];
-
-    public function user()
-    {
-        return $this->belongsTo(user::class,'userId','id');
-    }
-    public function school()
-    {
-        return $this->belongsTo(school::class,'schoolId','id');
-    }
+    ]; 
 }

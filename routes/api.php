@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\managercontroller;
 use App\Http\Controllers\Admin\schoolcontroller;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\Manager\levelcontroller;
 use App\Http\Controllers\Manager\schoolteachercontroller;
 use App\Http\Controllers\Manager\teachercontroller;

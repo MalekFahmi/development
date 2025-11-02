@@ -14,6 +14,10 @@ class EvaluationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+        'userId'=>$this->userId,
+        'schoolId'=>$this->schoolId,
+        'rating'=>$this->rating
+        ];
     }
 }
