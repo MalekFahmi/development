@@ -17,7 +17,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $usercomments=Comment::where('userId',auth('user'))->get();
+        $usercomments=Comment::where('userId',auth('student')->id())->get();
         return CommentResource::collection($usercomments);
     }
 
@@ -32,7 +32,7 @@ class CommentController extends Controller
                 'description'=>['required']
             ]
         );
-        $input['userId']=auth('user')->id();
+        $input['userId']=auth('student')->id();
         Comment::create($input);
         return response()->json([
             'message' => 'Comment added successfully']);
@@ -43,7 +43,7 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        $usercomment=Comment::where('id',$id)->where('userId',auth('user')->id())->firstorfail();
+        $usercomment=Comment::where('id',$id)->where('userId',auth('student')->id())->firstorfail();
         return CommentResource::collection($usercomment);
     }
 
@@ -58,7 +58,7 @@ class CommentController extends Controller
                 'description'=>['required']
             ]
         );
-        $usercomment=Comment::where('id',$id)->where('userId',auth('user')->id())->firstorfail();
+        $usercomment=Comment::where('id',$id)->where('userId',auth('student')->id())->firstorfail();
         $usercomment->update($update);
         return response()->json([
             'message' => 'comment is updated successfully']);
@@ -69,7 +69,7 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        $usercomment=Comment::where('id',$id)->where('userId',auth('user')->id())->firstorfail();
+        $usercomment=Comment::where('id',$id)->where('userId',auth('student')->id())->firstorfail();
         $usercomment->delete();
         return response()->json(data: ['message'=>'comment is deleted successfully']);
     }

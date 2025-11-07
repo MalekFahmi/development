@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Succsess_Ratings;
 use App\Http\Requests\StoreSuccsess_RatingsRequest;
 use App\Http\Requests\UpdateSuccsess_RatingsRequest;

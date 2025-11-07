@@ -13,7 +13,7 @@ class AdminAuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         try {
-            if (!$token = JWTAuth::attempt($credentials)) {
+            if (!$token = auth('admin')->attempt($credentials)) {
                 return response()->json(['error' => 'Invalid credentials'], 401);
             }
         } catch (JWTException $e) {
@@ -22,14 +22,14 @@ class AdminAuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'expires_in' => auth('admin')->factory()->getTTL() * 60,
         ]);
     }
 
     public function logout()
     {
         try {
-            JWTAuth::invalidate(JWTAuth::getToken());
+            auth('admin')::invalidate(auth('admin')::getToken());
         } catch (JWTException $e) {
             return response()->json(['error' => 'Failed to logout, please try again'], 500);
         }

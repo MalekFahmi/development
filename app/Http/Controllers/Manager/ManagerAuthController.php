@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class AuthController extends Controller
+class ManagerAuthController extends Controller
 {
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         try {
-            if (!$token = JWTAuth::attempt($credentials)) {
+            if (!$token = auth('manager')->attempt($credentials)) {
                 return response()->json(['error' => 'Invalid credentials'], 401);
             }
         } catch (JWTException $e) {
@@ -26,14 +26,14 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'expires_in' => auth('manager')->factory()->getTTL() * 60,
         ]);
     }
 
     public function logout()
     {
         try {
-            JWTAuth::invalidate(JWTAuth::getToken());
+            auth('manager')->invalidate(auth('manager')->getToken());
         } catch (JWTException $e) {
             return response()->json(['error' => 'Failed to logout, please try again'], 500);
         }
@@ -44,7 +44,7 @@ class AuthController extends Controller
     public function getUser()
     {
         try {
-            $user = Auth::user();
+            $user = auth('manager')->user();
             if (!$user) {
                 return response()->json(['error' => 'User not found'], 404);
             }
@@ -57,7 +57,7 @@ class AuthController extends Controller
     public function updateUser(Request $request)
     {
         try {
-            $user = Auth::user();
+            $user = auth('manager')->user();
             $user->update($request->only(['name', 'email']));
             return response()->json($user);
         } catch (JWTException $e) {
