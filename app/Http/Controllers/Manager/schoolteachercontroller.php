@@ -32,7 +32,8 @@ class schoolteachercontroller extends Controller
      */
     public function show(string $id)
     {
-        //
+        $schoolteacher=SchoolTeacher::with(['school'])->findOrFail($id);
+        return new SchoolTeacherResource($schoolteacher);
     }
 
     /**
@@ -40,7 +41,11 @@ class schoolteachercontroller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $update=$request->validated();
+        $schoolteacher=SchoolTeacher::findOrFail($id);
+        $schoolteacher->update($update);
+        return response()->json([
+            'message' => 'teacher is updated successfully']);
     }
 
     /**
@@ -48,6 +53,8 @@ class schoolteachercontroller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $schoolteacher=SchoolTeacher::findorFail(id: $id); 
+        $schoolteacher->delete();
+        return response()->json(data: ['message'=>'teacher is deleted successfully']);
     }
 }

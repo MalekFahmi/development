@@ -29,7 +29,7 @@ class AdminAuthController extends Controller
     public function logout()
     {
         try {
-            auth('admin')::invalidate(auth('admin')::getToken());
+            auth('admin')->invalidate(auth('admin')->getToken());
         } catch (JWTException $e) {
             return response()->json(['error' => 'Failed to logout, please try again'], 500);
         }

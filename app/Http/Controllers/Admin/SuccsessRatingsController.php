@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Succsess_Ratings;
 use App\Http\Requests\StoreSuccsess_RatingsRequest;
-use App\Http\Requests\UpdateSuccsess_RatingsRequest;
 use App\Http\Resources\Succsess_RatingResource;
 
 class SuccsessRatingsController extends Controller
@@ -34,25 +33,31 @@ class SuccsessRatingsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Succsess_Ratings $id)
+    public function show(string $id)
     {
-        $rating=Succsess_Ratings::with(['school'])->load($id);
-        return Succsess_RatingResource::collection($rating);
+        $rating=Succsess_Ratings::with(['school'])->findOrFail($id);
+        return new Succsess_RatingResource($rating);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreSuccsess_RatingsRequest $request, Succsess_Ratings $succsess_Ratings)
+    public function update(StoreSuccsess_RatingsRequest $request, string $id)
     {
-        //
+        $update=$request->validated();
+        $rating=Succsess_Ratings::findOrFail($id);
+        $rating->update($update);
+        return response()->json([
+            'message' => 'rating is updated successfully']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Succsess_Ratings $succsess_Ratings)
+    public function destroy(string $id)
     {
-        //
+        $rating=Succsess_Ratings::findorFail(id: $id); 
+        $rating->delete();
+        return response()->json(data: ['message'=>'rating is deleted successfully']);
     }
 }
