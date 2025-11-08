@@ -23,7 +23,7 @@ class FeesRequest extends FormRequest
     {
         return [
             'schoolId' => ['required'],
-            'levelId'=>['required'],
+            'levellId'=>['required'],
             'price'=>['required']
         ];
     }

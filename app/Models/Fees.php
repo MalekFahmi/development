@@ -8,12 +8,12 @@ class Fees extends Model
 {
     protected $fillable=[
         'schoolId',
-        'levelId',
+        'levellId',
         'price'
     ];
     public function level()
     {
-        return $this->belongsTo(Level::class,'levelId','id');
+        return $this->belongsTo(Level::class,'levellId','id');
     }
     public function school()
     {

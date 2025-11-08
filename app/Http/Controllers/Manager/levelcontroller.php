@@ -43,7 +43,7 @@ class levelcontroller extends Controller
      */
     public function update(LevelRequest $request, string $id)
     {
-         $update = $request->validated();
+        $update = $request->validated();
         $grade=Level::findOrFail($id);
         $grade->update($update);
         return response()->json([

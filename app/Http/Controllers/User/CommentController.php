@@ -5,10 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
 use App\Http\Resources\CommentResource;
-use GuzzleHttp\Psr7\Request as Psr7Request;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {

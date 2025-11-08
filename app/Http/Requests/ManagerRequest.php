@@ -23,10 +23,10 @@ class ManagerRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'email' => ['required','unique:managers,email'],
+            'email' => ['required'],
             'phoneNumber' =>['required'],
-            'password'=>['required','password'],
-            'schoolId'=>['required','exists:schools,id']
+            'password'=>['required'],
+            'schoolId'=>['required']
         ];
     }
 }
