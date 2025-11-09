@@ -16,11 +16,11 @@ class EvaluationController extends Controller
      */
     public function index()
     {
-        $userevaluations=Evaluation::where('userId',auth('user'))->get();
+        $userevaluations=Evaluation::where('userId',auth('student')->id())->get();
         return EvaluationResource::collection($userevaluations);
     }
 
-    public function store(StoreEvaluationRequest $request)
+    public function store(Request $request)
     {
         $input=$request->validate(
             [
@@ -28,7 +28,7 @@ class EvaluationController extends Controller
                 'rating'=>['required']
             ]
         );
-        $input['userId']=auth('user')->id();
+        $input['userId']=auth('student')->id();
         Evaluation::create($input);
         return response()->json([
             'message' => 'rating added successfully']);
@@ -39,8 +39,8 @@ class EvaluationController extends Controller
      */
     public function show(string $id)
     {
-        $userevaluation=Evaluation::where('id',$id)->where('userId',auth('user')->id())->firstorfail();
-        return EvaluationResource::collection($userevaluation);
+        $userevaluation=Evaluation::where('id',$id)->where('userId',auth('student')->id())->firstorfail();
+        return new EvaluationResource($userevaluation);
     }
 
     /**
@@ -54,7 +54,7 @@ class EvaluationController extends Controller
                 'rating'=>['required']
             ]
             );
-        $userevaluation=Evaluation::where('id',$id)->where('userId',auth('user')->id())->firstorfail();
+        $userevaluation=Evaluation::where('id',$id)->where('userId',auth('student')->id())->firstorfail();
         $userevaluation->update($update);
         return response()->json([
             'message' => 'rating is updated successfully']);
@@ -65,7 +65,7 @@ class EvaluationController extends Controller
      */
     public function destroy(string $id)
     {
-        $userevaluation=Evaluation::where('id',$id)->where('userId',auth('user')->id())->firstorfail();
+        $userevaluation=Evaluation::where('id',$id)->where('userId',auth('student')->id())->firstorfail();
         $userevaluation->delete();
         return response()->json(data: ['message'=>'rating is deleted successfully']);
     }

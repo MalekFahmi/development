@@ -42,7 +42,7 @@ class CommentController extends Controller
     public function show(string $id)
     {
         $usercomment=Comment::where('id',$id)->where('userId',auth('student')->id())->firstorfail();
-        return CommentResource::collection($usercomment);
+        return new CommentResource($usercomment);
     }
 
     /**

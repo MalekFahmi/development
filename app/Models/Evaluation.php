@@ -12,4 +12,12 @@ class Evaluation extends Model
         'schoolId',
         'rating'
     ];
+    public function school()
+    {
+        return $this->belongsTo(school::class,'schoolId','id');
+    }
+     public function user()
+    {
+        return $this->belongsTo(user::class,'userId','id');
+    }
 }

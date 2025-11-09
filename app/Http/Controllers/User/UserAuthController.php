@@ -76,7 +76,7 @@ class UserAuthController extends Controller
     public function updateUser(Request $request)
     {
         try {
-            $user=User::where('id',auth('student')->id())->get();
+            $user=User::where('id',auth('student')->id())->get()->first();
             //$user = auth('user')->user();
             $user->update($request->only(['name', 'email']));
             return response()->json($user);

@@ -13,7 +13,7 @@ class EvaluationPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class EvaluationPolicy
      */
     public function view(User $user, Evaluation $evaluation): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class EvaluationPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class EvaluationPolicy
      */
     public function update(User $user, Evaluation $evaluation): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class EvaluationPolicy
      */
     public function delete(User $user, Evaluation $evaluation): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class EvaluationPolicy
      */
     public function restore(User $user, Evaluation $evaluation): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class EvaluationPolicy
      */
     public function forceDelete(User $user, Evaluation $evaluation): bool
     {
-        return false;
+        return true;
     }
 }

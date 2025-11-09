@@ -15,8 +15,8 @@ class EvaluationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-        'userId'=>$this->userId,
-        'schoolId'=>$this->schoolId,
+        'userId'=>$this->user->userId,
+        'schoolId'=>$this->school->schoolId,
         'rating'=>$this->rating
         ];
     }
